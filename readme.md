@@ -1,17 +1,17 @@
-NameService is a distributed name pool.
+NameService is a distributed name pool that depends on ZooKeeper.
 
-if a name pool has been initialized(using InitNameNodes): [svc_1, svc_2, svc_3].
+If a name pool has been initialized(using `InitNameNodes`): [svc_1, svc_2, svc_3].
 
-Using GetName, you can retrieve a name from it.
+Using `GetName` can obtain a name from it, for example "svc_2".
 
-Using KeepAlive, you can maintain a heartbeat.
+Using `KeepAlive` can maintain a heartbeat.
 
-When ctx ends, KeepAlive will exit, and the name will be returned to the pool.
+When ctx ends, `KeepAlive` will exit, and the name will be returned to the pool.
 
 Usage:
 ```go
 ns, err := NewNameService(ctx,
-	"127.0.0.123", // Configure the IP of this service.
+	"127.0.0.123", // sets the address for this service, will serve as its identifier.
 	[]string{ // zk configuration
 		"127.0.0.1",
 	},
@@ -28,5 +28,7 @@ if err != nil { // If the name pool is exhausted, an error will be returned.
 
 log.Infof("get name:%v", name)
 go ns.KeepAlive(name) // If you get a name, use keepAlive to hold onto it.
-// dosth with name
+
+// You can use this name, for example, to load configurations.
+loadConfigs(name)
 ```
