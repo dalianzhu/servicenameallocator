@@ -8,6 +8,8 @@ Using `KeepAlive` can maintain a heartbeat.
 
 When ctx ends, `KeepAlive` will exit, and the name will be returned to the pool.
 
+You can also use `InitNameNodes` to add new names to the pool.
+
 Usage:
 ```go
 ns, err := NewNameService(ctx,
