@@ -10,6 +10,10 @@ When ctx ends, `KeepAlive` will exit, and the name will be returned to the pool.
 
 You can also use `InitNameNodes` to add new names to the pool.
 
+If the service exits abnormally, the name will continue to be occupied until it is recovered using `ResetNameForce`. 
+
+You can use `GetNamesInfo` to obtain information on available and abnormal names.
+
 Usage:
 ```go
 ns, err := NewNameService(ctx,
